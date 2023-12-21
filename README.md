@@ -33,11 +33,11 @@ Contributions to the SS14 Dashboard are welcome! Please feel free to submit pull
 This project is licensed under the [MPL-2.0 License](LICENSE).
 
 ## Contact
-- YuNii - [benjamin@bhenrich.de]
+- YuNii - benjamin@bhenrich.de
 - Project Link: https://github.com/bhenrich/ss14-serverdashboard
 
 ## Acknowledgments
-- Space Station 14 Game, Concept, Server Data and Logo Art by (Space Wizards)[https://github.com/space-wizards]
-- Space Station 14 Dashboard by (YuNii)[https://github.com/bhenrich]
+- Space Station 14 Game, Concept, Server Data and Logo Art by [Space Wizards](https://github.com/space-wizards)
+- Space Station 14 Dashboard by [YuNii](https://github.com/bhenrich)
 
 - This project is a independent project and not affiliated with Space Station 14 or Space Wizards in any way. All rights reserved by their respective owners. For more information, please visit https://spacestation14.io/
