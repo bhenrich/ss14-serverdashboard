@@ -125,7 +125,7 @@ function App() {
       </header>
 
       <div className="refreshButton">
-        <button onClick={fetchData} className="refresh">
+        <button onClick={fetchData} className="refresh" id="refButton">
           Refresh
         </button>
         <span className="refreshText">Refresh every &nbsp;</span>
@@ -201,10 +201,13 @@ function App() {
         </div>
       </main>
 
+      <div className="version">
+        <span className="versionText">v1.0.1 - Made with 💜 by YuNii</span>
+      </div>
       <footer>
         <p className="footerText">
           <a href="https://github.bhenrich.de" target="_blank" rel="noreferrer">
-            Made with 💜 by YuNii
+            💻 GitHub Repository 💻
           </a>
         </p>
         <p className="footerText">

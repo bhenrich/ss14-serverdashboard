@@ -14,10 +14,6 @@ a:hover {
   color: #ada24b;
 }
 
-a:visited {
-  color: #fefefe;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -44,6 +40,20 @@ a:visited {
   margin-left: 20px;
   margin-top: 20px;
   margin-right: 20px;
+}
+
+#refButton:hover {
+  scale: 1.05;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  /* highlight using shadow */
+  box-shadow: 0 0 0 0.2rem rgba(173, 162, 75, 0.25);
+}
+
+#refButton {
+  scale: 1;
+  transition: all 0.2s ease-in-out;
 }
 
 .refreshDropdown {
@@ -179,6 +189,20 @@ footer {
 
 main {
   margin-bottom: 80px;
+}
+
+.versionText {
+  font-size: 12px;
+  color: #fafafa;
+  margin-top: 10px;
+}
+
+.version {
+  position: fixed;
+  bottom: 85px;
+  /* centered horizontally */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media only screen and (max-width: 600px) {
