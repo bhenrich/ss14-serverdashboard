@@ -8,12 +8,7 @@ const port = 5033;
 
 // Your SSL Certs here
 const credentials = {
-  key: fs.readFileSync(
-    "/etc/letsencrypt/live/yuniiworks.de/privkey.pem",
-    "utf8",
-  ),
-  cert: fs.readFileSync("/etc/letsencrypt/live/yuniiworks.de/cert.pem", "utf8"),
-  ca: fs.readFileSync("/etc/letsencrypt/live/yuniiworks.de/chain.pem", "utf8"),
+
 };
 
 // allow all and any cors requests
@@ -55,5 +50,5 @@ app.get("/servers", async (req, res) => {
 
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, () => {
-  console.log(`Server running on https://yuniiworks.de:${port}`);
+  console.log(`Server running on ${port}`);
 });
