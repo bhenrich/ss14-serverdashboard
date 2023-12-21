@@ -15,6 +15,7 @@ SS14 Dashboard is a dynamic and user-friendly dashboard for monitoring the statu
 ### Prerequisites
 - Node.js
 - npm or Yarn
+- ReactJS ^18.2.0
 
 ### Installation
 1. Clone the repository:
