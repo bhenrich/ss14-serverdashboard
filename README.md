@@ -1,7 +1,7 @@
 # SS14 Dashboard
 
 ## Overview
-SS14 Dashboard is a dynamic and user-friendly dashboard for monitoring and managing Space Station 14 servers. It provides real-time data visualization and server management tools, designed to enhance the gaming experience for both players and administrators.
+SS14 Dashboard is a dynamic and user-friendly dashboard for monitoring the status of the official Space Station 14 servers (reffered to as "Wizard's Den"). It provides real-time data visualization and server management tools, designed to enhance the gaming experience for both players and administrators.
 
 ## Features
 - Real-time server statistics: Track player counts, server status, and other critical metrics.
