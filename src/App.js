@@ -6,6 +6,14 @@ function App() {
   const [servers, setServers] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
+  const [embedMode, setEmbedMode] = useState(false);
+  const [embedName, setEmbedName] = useState("");
+  const [embedZoom, setEmbedZoom] = useState(1.0);
+
+  useEffect(() => {
+    parseEmbedMode();
+  }, []);
+
   useEffect(() => {
     if (refresh > 0) {
       const interval = setInterval(() => {
@@ -16,6 +24,37 @@ function App() {
 
     fetchData();
   }, [refresh]);
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  function parseEmbedMode() {
+    const embed = urlParams.get("embed");
+    const serverNameFromUrl = urlParams.get("server");
+    const refreshRate = urlParams.get("refresh");
+    const zoom = urlParams.get("zoom");
+
+    if (zoom) {
+      setEmbedZoom(zoom);
+    }
+
+    if (refreshRate) {
+      setRefresh(refreshRate);
+    }
+
+    if (embed === "true") {
+      setEmbedMode(true);
+      setEmbedName(serverNameFromUrl); // Directly use the URL parameter value
+      document.body.style.backgroundColor = "transparent";
+    }
+
+    if (refreshRate) {
+      setRefresh(refreshRate);
+    }
+  }
+
+  useEffect(() => {
+    console.log(embedMode, embedName);
+  }, [embedMode, embedName]);
 
   function calcRoundTimeLength(startTime, running) {
     if (running !== 1) return "In the Lobby";
@@ -115,43 +154,13 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">
-        <div className="logo">
-          <a href="https://spacestation14.io" target="_blank" rel="noreferrer">
-            <img src="logo.png" className="headerLogo" alt="logo" />
-          </a>
-          <span className="headerText">Wizard's Den Server Dashboard</span>
-        </div>
-      </header>
-
-      <div className="refreshButton">
-        <button onClick={fetchData} className="refresh" id="refButton">
-          Refresh
-        </button>
-        <span className="refreshText">Refresh every &nbsp;</span>
-        <select
-          className="refreshDropdown"
-          name="Automatic Refresh"
-          onChange={(e) => setRefresh(e.target.value)}
-        >
-          <option value="0" className="refreshDropdownInner">
-            Manual
-          </option>
-          <option value="1" className="refreshDropdownInner">
-            1 Minute
-          </option>
-          <option value="5" className="refreshDropdownInner">
-            5 Minutes
-          </option>
-          <option value="10" className="refreshDropdownInner">
-            10 Minutes
-          </option>
-        </select>
-      </div>
-      <main>
-        <div className="cardContainer">
-          {servers.map((server, index) => (
-            <div className="card" key={index}>
+      {embedMode ? (
+        servers
+          .filter((server) =>
+            server.name.toLowerCase().includes(embedName.toLowerCase()),
+          )
+          .map((server, index) => (
+            <div className="cardEmbed" key={index} style={{ zoom: embedZoom }}>
               <div className="leftContainer">
                 <div className="cardHeader">
                   <span className="cardTitle">{server.name}</span>
@@ -197,25 +206,125 @@ function App() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </main>
+          ))
+      ) : (
+        <>
+          <header className="header">
+            <div className="logo">
+              <a
+                href="https://spacestation14.io"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src="logo.png" className="headerLogo" alt="logo" />
+              </a>
+              <span className="headerText">Wizard's Den Server Dashboard</span>
+            </div>
+          </header>
 
-      <div className="version">
-        <span className="versionText">v1.0.1 - Made with 💜 by YuNii</span>
-      </div>
-      <footer>
-        <p className="footerText">
-          <a href="https://github.bhenrich.de" target="_blank" rel="noreferrer">
-            💻 GitHub Repository 💻
-          </a>
-        </p>
-        <p className="footerText">
-          <a href="https://spacestation14.io" target="_blank" rel="noreferrer">
-            ✨ Play Space Station 14 ✨
-          </a>
-        </p>
-      </footer>
+          <div className="refreshButton">
+            <button onClick={fetchData} className="refresh" id="refButton">
+              Refresh
+            </button>
+            <span className="refreshText">Refresh every &nbsp;</span>
+            <select
+              className="refreshDropdown"
+              name="Automatic Refresh"
+              onChange={(e) => setRefresh(e.target.value)}
+            >
+              <option value="0" className="refreshDropdownInner">
+                Manual
+              </option>
+              <option value="1" className="refreshDropdownInner">
+                1 Minute
+              </option>
+              <option value="5" className="refreshDropdownInner">
+                5 Minutes
+              </option>
+              <option value="10" className="refreshDropdownInner">
+                10 Minutes
+              </option>
+            </select>
+          </div>
+          <main>
+            <div className="cardContainer">
+              {servers.map((server, index) => (
+                <div className="card" key={index}>
+                  <div className="leftContainer">
+                    <div className="cardHeader">
+                      <span className="cardTitle">{server.name}</span>
+                      <br />
+                      <span className="cardPlayers">
+                        {server.players} / {server.soft_max_players} Players
+                      </span>
+                      <br />
+                    </div>
+                    <div className="cardBody">
+                      <div className="cardStatus">
+                        <span className="cardStatusText">{server.status}</span>
+                        <br />
+                      </div>
+                      <div className="cardFooter">
+                        <span className="serverMap">
+                          Station:{" "}
+                          {server.map ? server.map : "Error fetching Map"}
+                        </span>
+                        <br />
+                        <span className="serverRuntime">
+                          {calcRoundTimeLength(
+                            server.round_start_time,
+                            server.run_level,
+                          )}
+                        </span>
+                        <br />
+                        <div className="serverTags">
+                          {parseTags(server.tags).map((tag, index) => (
+                            <span className="serverTag" key={index}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rightContainer">
+                    <div className="cardRoundNr">
+                      <span className="serverRoundNr">
+                        Shift #{server.round_id}
+                      </span>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </main>
+
+          <div className="version">
+            <span className="versionText">v1.1.0 - Made with 💜 by YuNii</span>
+          </div>
+          <footer>
+            <p className="footerText">
+              <a
+                href="https://github.bhenrich.de"
+                target="_blank"
+                rel="noreferrer"
+              >
+                💻 GitHub Repository 💻
+              </a>
+            </p>
+            <p className="footerText">
+              <a
+                href="https://spacestation14.io"
+                target="_blank"
+                rel="noreferrer"
+              >
+                ✨ Play Space Station 14 ✨
+              </a>
+            </p>
+          </footer>
+        </>
+      )}
     </div>
   );
 }

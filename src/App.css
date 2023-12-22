@@ -136,6 +136,21 @@ a:hover {
   justify-content: space-between;
 }
 
+.cardEmbed {
+  background-color: #212126;
+  border: #ada24b 2px solid;
+  border-radius: 10px;
+  /* Removed fixed width, let grid handle it */
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: auto;
+  height: auto;
+}
+
 .serverRoundNr {
   font-weight: bold;
   font-size: 12px;
