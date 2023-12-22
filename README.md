@@ -12,6 +12,26 @@ A live version of this repository is viewable [on my website](https://yunii.net/
 - Responsive design: Optimal viewing experience across a wide range of devices.
 - Easy embeddability: Integrate the dashboard into other websites with a simple script.
 - Easy-to-use public API endpoints: Retrieve server data with a simple GET request.
+- Embed Functionality: Embed the dashboard into other websites with a simple script.
+
+## Embedding
+You can embed single server widgets into your website by adding the following iframe code to your HTML document:
+```html
+<iframe src="https://yunii.net/ss14?embed=true&server=leviathan" width="420px" height="150px" frameborder="0" scrolling="no"></iframe>
+```
+### Embed Parameters
+- `embed` (boolean) - Set to `true` to enable embed mode. **Required**
+- `server` (string) - The server name to display. **Required**
+  - Available Servers: `leviathan`, `lizard`, `vulture`, `salamander`, `spider`, `miros` (RIP Centipede)
+- `refresh`(float): The refresh interval in minutes. **Optional**
+  - Default: No refresh
+  - Please note that I highly recommend setting a refresh interval of at least `1` to avoid spamming my server, going below `1` is possible if absolutely needed but not recommended. If you need to, please ask me first. Thanks!
+- `zoom` (float): The zoom level of the embedded widget. **Optional**
+  - Default: `1`
+  - Supported Zoom Levels: `0.25` - `4`
+
+You can freely set the width and height of the iframe to your liking, the widget will automatically adjust to the given size. I recommend lowering the zoom if you need to go below 400x150
+*Note: Not setting both of the required parameters results in nothing being displayed. Make sure both `embed` and `server` are set!*
 
 ## Getting Started
 
