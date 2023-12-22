@@ -3,6 +3,9 @@
 ## Overview
 SS14 Dashboard is a dynamic and user-friendly dashboard for monitoring the status of the official Space Station 14 servers (reffered to as "Wizard's Den"). It provides real-time data visualization and server management tools, designed to enhance the gaming experience for both players and administrators.
 
+## Live Demonstration
+A live version of this repository is viewable [on my website](https://yunii.net/ss14)
+
 ## Features
 - Real-time server statistics: Track player counts, server status, and other critical metrics.
 - Automatic refresh options: Customize data refresh intervals for up-to-date information.
